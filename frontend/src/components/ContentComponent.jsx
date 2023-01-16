@@ -2,23 +2,20 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import "../App.css";
 import TextComponent from './TextComponent';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function ContentComponent() {
+import fetchQuotes from './ApiLoader';
+import { GET_DESCRIPTION } from '../constants/apiConstants';
 
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-      document.title = `Ви натиснули ${count} разів`;
-    });
+export default function  ContentComponent () {
 
   return (
     <>
     <Container>
         <Row>
-            <Col class="col-sm-2">
+            <Col className="col-sm-2">
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => setCount(count + 1)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">About</Button>
+                    <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">About</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
                     <Button variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">Education</Button>
@@ -49,7 +46,7 @@ export default function ContentComponent() {
 
             <Col className="col-sm-10">
                 <div>
-                    <p>{count}</p> 
+                    <p>Value</p> 
                 </div>
                 <TextComponent/>
             </Col>
