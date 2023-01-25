@@ -1,5 +1,8 @@
 const API_URL = "http://127.0.0.1:8000/api/v1/"
 
+
+export const GET_BUTTONS  = 'http://127.0.0.1:8000/port_api/request_viev/'
+export const GET_BUTTON = API_URL + 'buttons/'
 export const GET_DESCRIPTION = API_URL + 'description/'
 export const GET_USERS = API_URL + 'users/'
 export const GET_GROUPS = API_URL + 'groups/'

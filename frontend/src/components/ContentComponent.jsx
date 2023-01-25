@@ -6,10 +6,35 @@ import React from 'react';
 
 import fetchQuotes from './ApiLoader';
 import { GET_DESCRIPTION } from '../constants/apiConstants';
+import fetchButtons from './ApiButtonLoader';
+import { useState, useEffect } from 'react';
+
+
 
 export default function  ContentComponent () {
 
-  return (
+   const [data, setData] = useState({data: []});
+
+   useEffect(() => {
+    const fetchData = async () => {
+        const data = await fetchButtons();
+        setData(data)
+      }
+    
+    fetchData()
+
+    console.log(data)
+    },[])
+
+
+   const handleClick = async () => {
+    const result = await fetchButtons()
+    console.log('!!!', result)
+    setData(result)
+   }
+
+
+   return (
     <>
     <Container>
         <Row>
@@ -18,7 +43,7 @@ export default function  ContentComponent () {
                     <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">About</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
-                    <Button variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">Education</Button>
+                    <Button onClick={() => handleClick()}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[1]?.name_of_category}</Button>
                 </div> 
                 <div className="row align-items-center justify-content-center">
                     <Button variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">Experience</Button>
@@ -41,6 +66,7 @@ export default function  ContentComponent () {
                 <div className="row align-items-center justify-content-center">
                     <Button href='/' variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">Return</Button>
                 </div>
+                <br/>
 
             </Col>
 

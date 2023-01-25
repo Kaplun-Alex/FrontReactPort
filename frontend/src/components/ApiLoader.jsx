@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-
 export default function fetchQuotes (url) {
-    
-       
+           
     axios.get(url, {
         headers: {
             'Authorization': `Basic`
@@ -20,3 +18,8 @@ export default function fetchQuotes (url) {
     console.error(error)
     })
 }
+
+
+
+
+
