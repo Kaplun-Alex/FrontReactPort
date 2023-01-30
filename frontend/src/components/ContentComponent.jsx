@@ -1,38 +1,51 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import "../App.css";
-import TextComponent from './TextComponent';
 import React from 'react';
-
-import fetchQuotes from './ApiLoader';
-import { GET_DESCRIPTION } from '../constants/apiConstants';
 import fetchButtons from './ApiButtonLoader';
 import { useState, useEffect } from 'react';
+import descriptionLoader from './DescriptionLoader';
+
 
 
 
 export default function  ContentComponent () {
     
-   const [data, setData] = useState({data:''});
+   const [buttonData, setButtonData] = useState({buttonData:''});
+   const [descriptionData, setDescriptionData] = useState({descriptionData:''});
+   const [textComponentState, setStateTextComponent] = useState('');
 
     useEffect(() => {
-    const fetchData = async () => {
-        const data = await fetchButtons();
-        setData(data)
-      }
-    
-   fetchData()
+    const fetchButtonData = async () => {
+        const buttData = await fetchButtons();
+        setButtonData(buttData)
+    }
+    const fetchDescriptionData = async () => {
+        const desData = await descriptionLoader();
+        setDescriptionData(desData)
 
-    console.log(data)
+    }   
+        
+    fetchButtonData()
+    fetchDescriptionData()
+
+    console.log(buttonData, descriptionData)
     },[])
 
 
-   const handleClick = async () => {
+    const setText  = async (val) => {
+        const textValue = await val
+        setStateTextComponent(textValue)
+    }
+
+
+    /*
+    const handleClick = async () => {
     const result = await fetchButtons()
     console.log('!!!', result)
-    setData(result)
+    setButtonData(result)
    }
-
+    */
 
    return (
     <>
@@ -40,37 +53,36 @@ export default function  ContentComponent () {
         <Row>
             <Col className="col-sm-2">
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[0]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[0]?.about_field)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[0]?.name_of_category}</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => handleClick()}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[1]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[2]?.about_field)}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[1]?.name_of_category}</Button>
                 </div> 
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[2]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[5]?.about_field)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[2]?.name_of_category}</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => handleClick()}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[3]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[3]?.about_field)}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[3]?.name_of_category}</Button>
                 </div> 
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[4]?.name_of_category}</Button>
+                    <Button onClick={() => setText('img')} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[4]?.name_of_category}</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => handleClick()}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[5]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[1]?.about_field)}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[5]?.name_of_category}</Button>
                 </div> 
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => fetchQuotes(GET_DESCRIPTION)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[6]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[4]?.about_field)} variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[6]?.name_of_category}</Button>
                 </div>    
                 <div className="row align-items-center justify-content-center">
-                    <Button onClick={() => handleClick()}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{data[7]?.name_of_category}</Button>
+                    <Button onClick={() => setText(descriptionData[6]?.about_field)}variant="light" className="btn btn-outline-dark mybtn btn-block vikingfont">{buttonData[7]?.name_of_category}</Button>
                 </div> 
 
             </Col>
 
             <Col className="col-sm-10">
                 <div>
-                    <p>Value</p> 
+                    <p>{textComponentState}</p> 
                 </div>
-                <TextComponent/>
             </Col>
 
         </Row>

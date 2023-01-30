@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { GET_BUTTON } from '../constants/ApiConstants'
+import {GET_DESCRIPTION } from '../constants/ApiConstants'
 
 
-export default async function fetchButtons () {
+export default async function descriptionLoader () {
 
-    return axios.get(GET_BUTTON, {
+    return axios.get(GET_DESCRIPTION, {
         headers: {
             'Authorization': `Basic`
         },
